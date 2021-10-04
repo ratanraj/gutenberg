@@ -5,5 +5,5 @@ This command line tool will parse go language templates
 
 usage:
 ```
-gutenberg -data <template file>
+gutenberg -data <json data file> <template file>
 ```
