@@ -1,0 +1,27 @@
+name: Go
+
+on:
+  release:
+    types: [ created ]
+
+
+jobs:
+  release-matrix:
+    name: release Go binary
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        goos: [linux, windows, darwin]
+        goarch: ["386", amd64]
+        exclude:
+          - goarch: "386"
+            goos: darwin
+    steps:
+      - uses: actions/checkout@v2
+      - uses: wangyoucao577/go-release-action@v1.20
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          project_path: "./cmd/gutenberg"
+          goos: ${{ martix.goos }}
+          goarch: ${{ matrix.goarch }}
+
